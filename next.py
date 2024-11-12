@@ -8,6 +8,10 @@ uuid = ""
 code = ""
 token = ""
 
+# 创建token.txt文件
+with open("token.txt", "w") as f:
+    pass
+
 
 def generate_android_id():
     """生成AndroidId"""
@@ -111,11 +115,11 @@ def is_token_valid():
             ).json()["nickname"]
             clip_board_copy(token)
         return f"登录成功,欢迎 {r} !"
-    except:
-        return "未登录或登录失效"
+    except Exception as e:
+        return f"未登录或登录失效"
 
 
 def clip_board_copy(text):
     """复制到剪贴板"""
     command = f"echo {text} | clip"
-    subprocess.call(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(command, shell=True)
